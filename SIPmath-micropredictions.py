@@ -25,7 +25,8 @@ from bokeh.models import CustomJS
 from streamlit_bokeh_events import streamlit_bokeh_events
 from microprediction import MicroWriter
 warnings.filterwarnings('ignore')
-main_title = 'One Hour Ahead Stochastic IBM Stock Value Predictions'
+sipmath_name = "IBM Stock Value"
+main_title = f'One Hour Ahead Stochastic {sipmath_name} Predictions'
 st.set_page_config(page_title=f"microprediction: {main_title}", page_icon=None,
                    layout="wide", initial_sidebar_state="auto", menu_items=None)
 
@@ -116,7 +117,7 @@ def remove_outliers(data):
     filtered_data = [x for x in data if lower_bound <= x <= upper_bound]
     return filtered_data
 
-inliers = pd.DataFrame(remove_outliers(samples), columns=['stock_value'])
+inliers = pd.DataFrame(remove_outliers(samples), columns=[sipmath_name])
 
 def plot(m, big_plots=None, csv=None, term=None, name=None, key=None):
     # st.write(m)
@@ -207,7 +208,7 @@ def plot(m, big_plots=None, csv=None, term=None, name=None, key=None):
                                 c='darkblue')
                     ax.patch.set_facecolor('white')
                     ax.axes.yaxis.set_ticks([])
-                    ax.set(title='IBM Stock Value', xlabel='Tens of BPS')
+                    ax.set(title=sipmath_name, xlabel='Tens of BPS')
                     newax = fig.add_axes([0.5,0.5,0.5,0.5], anchor=(0.59, 0.15), zorder=1)
                     newax.imshow(im)
                     newax.axis('off')
